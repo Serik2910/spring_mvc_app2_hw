@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Books</title>
+    </head>
+    <body>
+        <div th:if="${result=='success'}">
+            <table >
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>AUTHOR</th>
+                        <th>YEAR</th>
+                        <th>DETAILS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="book:${books}">
+                        <td th:text = "${book.getId()}"/>
+                        <td th:text = "${book.getName()}"/>
+                        <td th:text = "${book.getAuthor()}"/>
+                        <td th:text = "${book.getYear()}"/>
+                        <td>
+                            <a th:href="@{/books/{id}(id=${book.getId()})}">Details</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            <hr/>
+
+            <a th:href="@{/books/new}">Create new book</a>
+        </div>
+        <div th:unless="${result=='success'}">
+            <p>failed to add book</p>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Person</title>
+    </head>
+    <body>
+        <div>
+            <label>ID:</label>
+            <p th:text="${person.getId()}"></p>
+        </div>
+        <div>
+            <label>Name:</label>
+            <p th:text="${person.getFullname()}"></p>
+        </div>
+        <div>
+            <label>Birthyear:</label>
+            <p th:text="${person.getBirthyear()}"></p>
+        </div>
+        <div th:if="${books.size()==0}">
+            <p>Человек не взял ни одной книги</p>
+        </div>
+        <div th:unless="${books.size()==0}">
+            <table >
+                <thead>
+                    <h4>Книги:</h4>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>AUTHOR</th>
+                        <th>YEAR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="book:${books}">
+                        <td th:text = "${book.getId()}"/>
+                        <td th:text = "${book.getName()}"/>
+                        <td th:text = "${book.getAuthor()}"/>
+                        <td th:text = "${book.getYear()}"/>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit</a>
+
+        <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+            <input type="submit" value="Delete">
+        </form>
+
+    </body>
+</html>

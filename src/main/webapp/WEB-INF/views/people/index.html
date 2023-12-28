@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>People</title>
+    </head>
+    <body>
+        <div th:if="${result=='success'}">
+            <table >
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>fullname</th>
+                        <th>birth year</th>
+                        <th>details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="person:${people}">
+                        <td th:text = "${person.getId()}"/>
+                        <td th:text = "${person.getFullname()}"/>
+                        <td th:text = "${person.getBirthyear()}"/>
+                        <td>
+                            <a th:href="@{/people/{id}(id=${person.getId()})}">Details</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            <hr/>
+
+            <a th:href="@{/people/new}">Create new person</a>
+        </div>
+        <div th:unless="${result=='success'}">
+            <p>failed to add person</p>
+        </div>
+    </body>
+</html>
